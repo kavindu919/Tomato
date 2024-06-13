@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ setShowLogin }) => {
   //make state for the active link
   const [menu, setMenu] = useState("Home");
   return (
@@ -43,7 +43,7 @@ const Navbar = () => {
           <img src="basket_icon.png" alt="basket" />
           <div className="dot"></div>
         </div>
-        <button>Sign in</button>
+        <button onClick={() => setShowLogin(true)}>Sign in</button>
       </div>
     </div>
   );
