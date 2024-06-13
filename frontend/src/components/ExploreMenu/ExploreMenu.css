@@ -46,3 +46,16 @@
   border: 4px solid rgb(29, 93, 232);
   padding: 2px;
 }
+
+@media (max-width: 1050px) {
+  .explore-menu-text {
+    min-width: 100%;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 750px) {
+}
+
+@media (max-width: 750px) {
+}
