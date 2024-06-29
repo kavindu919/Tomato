@@ -5,11 +5,16 @@ import { StoreContext } from "../../context/StoreContext.jsx";
 
 const FoodItem = ({ id, name, price, description, image }) => {
   //access for this function defined in Storecontext using context
-  const { cartItems, addTocart, removeFromCart } = useContext(StoreContext);
+  const { cartItems, addTocart, removeFromCart, url } =
+    useContext(StoreContext);
   return (
     <div className="food-item">
       <div className="food-item-img-container">
-        <img className="food-item-image" src={image} alt="foodimage" />
+        <img
+          className="food-item-image"
+          src={url + "/images/" + image}
+          alt="foodimage"
+        />
         {!cartItems[id] ? (
           <img
             className="add"
