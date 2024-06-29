@@ -7,7 +7,10 @@ export const StoreContext = createContext(null);
 const StoreContextProvider = (props) => {
   //make use sate for cart items
   const [cartItems, setcartItems] = useState({});
+  const url = "http://localhost:4000";
 
+  //make use state for hold token
+  const [token, setToken] = useState("");
   //add to cart function
   const addTocart = (itemId) => {
     //add new item
@@ -35,7 +38,12 @@ const StoreContextProvider = (props) => {
     }
     return totalAmount;
   };
-
+  //logic for the prevent log out while refreshing
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+    }
+  }, []);
   const contextValue = {
     food_list,
     cartItems,
@@ -43,6 +51,9 @@ const StoreContextProvider = (props) => {
     addTocart,
     removeFromCart,
     getTotalCartAmount,
+    url,
+    token,
+    setToken,
   };
   return (
     <StoreContext.Provider value={contextValue}>

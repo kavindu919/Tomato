@@ -33,7 +33,7 @@ const Add = ({ url }) => {
     formData.append("image", image);
     //make response using axios
     const response = await axios.post(`${url}/api/food/add`, formData);
-    //cheak the status of the response
+    //check the status of the response
     if (response.data.success) {
       setData({ name: "", description: "", price: "", category: "" });
       setImage(false);
