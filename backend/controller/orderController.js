@@ -69,4 +69,24 @@ const verifyOrder = async (req, res) => {
     res.json({ success: false, message: "Error" });
   }
 };
-export { placeOrder, verifyOrder };
+//user order for front end
+const userOreders = async (req, res) => {
+  try {
+    const orders = await orderModal.find({ userId: req.body.userId });
+    res.json({ success: true, data: orders });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: "Error" });
+  }
+};
+//function for get all the orders from all the users (listing orders for admin panel)
+const listOrders = async (req, res) => {
+  try {
+    const orders = await orderModal.find({});
+    res.json({ success: true, data: orders });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: "Error" });
+  }
+};
+export { placeOrder, verifyOrder, userOreders, listOrders };
