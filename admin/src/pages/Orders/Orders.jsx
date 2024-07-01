@@ -16,6 +16,16 @@ const Orders = ({ url }) => {
       toast.error("Error");
     }
   };
+  //function for update status of the order
+  const statusHandler = async (e, orderId) => {
+    const res = await axios.post(url + "/api/order/status", {
+      orderId,
+      status: e.target.value,
+    });
+    if (res.data.success) {
+      await fetchAllOrders();
+    }
+  };
   useEffect(() => {
     fetchAllOrders();
   }, []);
@@ -30,16 +40,39 @@ const Orders = ({ url }) => {
               <p className="order-item-food">
                 {order.items.map((item, index) => {
                   if (index === order.items.lenth - 1) {
-                    return item.name + "x" + item.quantity;
+                    return item.name + " x " + item.quantity;
                   } else {
-                    return item.name + "x" + item.quantity + ",";
+                    return item.name + " x " + item.quantity + ",";
                   }
                 })}
               </p>
               <p className="order-item-name">
                 {order.address.firstName + " " + order.address.lastName}
               </p>
+              <div className="order-item-address">
+                <p>{order.address.street + ","}</p>
+                <p>
+                  {order.address.city +
+                    "," +
+                    order.address.state +
+                    "," +
+                    order.address.country +
+                    ", " +
+                    order.address.zipcode}
+                </p>
+              </div>
+              <p className="oreder-item-phone">{order.address.phone}</p>
             </div>
+            <p>Items : {order.items.length}</p>
+            <p>$ {order.amount}</p>
+            <select
+              onChange={(e) => statusHandler(e, order._id)}
+              value={order.status}
+            >
+              <option value="Food Processing">Food Processing</option>
+              <option value="Out for delivey">Out for delivey</option>
+              <option value="Deliverd">Deliverd</option>
+            </select>
           </div>
         ))}
       </div>
